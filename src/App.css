@@ -1,0 +1,740 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background: #f7f7f5;
+  color: #222;
+
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+}
+
+/* ===== 앱 ===== */
+
+.app {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+.app h1 {
+  margin: 0 0 24px;
+
+  font-size: 32px;
+  font-weight: 700;
+}
+
+/* ===== 검색 ===== */
+
+.search {
+  width: 100%;
+
+  padding: 14px 16px;
+
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+
+  background: white;
+
+  font-size: 14px;
+
+  outline: none;
+
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.search:focus {
+  border-color: #cfcfcf;
+
+  box-shadow:
+    0 0 0 4px rgba(0, 0, 0, 0.04);
+}
+
+/* ===== 태그 ===== */
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  margin-top: 16px;
+  margin-bottom: 32px;
+}
+
+.tags button {
+  border: none;
+
+  background: white;
+
+  padding: 8px 12px;
+
+  border-radius: 999px;
+
+  cursor: pointer;
+
+  font-size: 13px;
+
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease;
+}
+
+.tags button:hover {
+  background: #ececec;
+}
+
+.tags button:active {
+  transform: scale(0.97);
+}
+
+/* ===== 갤러리 ===== */
+
+.grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fill, minmax(480px, 1fr));
+
+  gap: 20px;
+}
+
+/* ===== 카드 ===== */
+
+.card {
+  background: white;
+
+  border-radius: 16px;
+
+  overflow: hidden;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 4px 12px rgba(0, 0, 0, 0.04);
+
+    position: relative;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 6px 24px rgba(0, 0, 0, 0.08);
+}
+
+.card img {
+  width: 100%;
+
+  display: block;
+
+  aspect-ratio: 16 / 9;
+
+  object-fit: cover;
+
+  background: #eee;
+}
+
+/* ===== 카드 태그 ===== */
+
+.cardTags {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 6px;
+
+  padding: 14px;
+}
+
+.cardTags span {
+  background: #f1f1f1;
+
+  padding: 4px 8px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+
+  color: #666;
+}
+
+
+/* ===== 모바일 ===== */
+
+@media (max-width: 768px) {
+  .app {
+    padding: 20px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.uploadBox {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+
+  margin-bottom: 24px;
+
+  padding: 16px;
+
+  background: white;
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 1px 3px rgba(
+      0,
+      0,
+      0,
+      0.05
+    );
+}
+
+.uploadBox input[type='text'],
+.uploadBox input:not([type='file']) {
+  flex: 1;
+}
+
+.uploadBox button {
+  border: none;
+
+  background: #111;
+  color: white;
+
+  padding: 10px 16px;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+}
+
+.preview {
+  width: 320px;
+
+  border-radius: 12px;
+
+  margin-bottom: 20px;
+
+  display: block;
+
+  box-shadow:
+    0 4px 20px
+      rgba(0, 0, 0, 0.08);
+}
+
+.deleteBtn {
+  position: absolute;
+
+  top: 8px;
+  right: 8px;
+
+  width: 28px;
+  height: 28px;
+
+  border: none;
+
+  border-radius: 999px;
+
+  background: rgba(
+    0,
+    0,
+    0,
+    0.7
+  );
+
+  color: white;
+
+  cursor: pointer;
+
+  z-index: 10;
+}
+
+.deleteBtn:hover {
+  background: rgba(
+    255,
+    0,
+    0,
+    0.8
+  );
+}
+
+
+
+.deleteAction {
+  border: none;
+
+  background: #dc2626;
+
+  color: white;
+
+  padding: 10px 18px;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 24px;
+}
+
+.modalContent {
+  width: 100%;
+  max-width: 900px;
+
+  background: white;
+  border-radius: 16px;
+
+  overflow: hidden;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.modalImage {
+  width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  background: #111;
+}
+
+.modalActions {
+  padding: 16px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border-top: 1px solid #eee;
+}
+
+.deleteAction {
+  border: none;
+  background: #f3f3f3;
+  color: #d33;
+
+  padding: 8px 14px;
+  border-radius: 8px;
+
+  cursor: pointer;
+}
+
+.deleteAction:hover {
+  background: #ffecec;
+}
+
+.modalDate {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+
+
+
+.uploadBox {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+
+  padding: 16px;
+
+  background: white;
+  border-radius: 12px;
+
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+
+  flex-wrap: wrap;
+}
+
+.uploadBox input[type='file'] {
+  padding: 6px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background: #fafafa;
+}
+
+.uploadBox input:not([type='file']) {
+  flex: 1;
+
+  min-width: 200px;
+
+  padding: 10px 12px;
+
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+}
+
+.uploadBox button {
+  border: none;
+
+  background: #111;
+  color: white;
+
+  padding: 10px 16px;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+}
+
+.uploadBox input[type='file'] {
+  display: none;
+}
+
+.fileButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 14px;
+
+  background: #111;
+  color: white;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  font-size: 13px;
+
+  white-space: nowrap;
+}
+
+.fileButton:hover {
+  opacity: 0.9;
+}
+
+.uploadBox {
+  position: relative;
+}
+
+.addTrigger {
+  background: transparent;
+  border: none;
+
+  color: #9a9a9a;
+
+  font-size: 13px;
+  font-weight: 400;
+
+  padding: 6px 8px;
+
+  cursor: pointer;
+
+  transition: color 0.15s ease;
+}
+
+.addTrigger:hover {
+  color: #444;
+}
+
+.cardTagsContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* 기본 상태: 아이콘 숨김 */
+.editIcon {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  opacity: 0;
+  pointer-events: none;
+
+  border: none;
+  background: rgba(0, 0, 0, 0.05);
+  color: #666;
+
+  border-radius: 6px;
+  padding: 4px 6px;
+
+  cursor: pointer;
+
+  transition: all 0.15s ease;
+}
+
+/* hover 시 나타남 */
+.card:hover .editIcon {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* hover 시 살짝 강조 */
+.card:hover .cardTags {
+  padding-right: 28px;
+}
+
+.workspaceBar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.workspaceBar button {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  background: white;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.workspaceBar button.activeTab {
+  background: #111;
+  color: white;
+  border-color: #111;
+}
+
+.addTab {
+  background: transparent;
+  border: 1px dashed #ccc !important;
+  color: #777;
+}
+
+.addTab:hover {
+  border-color: #999;
+  color: #333;
+}
+
+.tabWrapper {
+  display: inline-flex;
+  align-items: center;
+}
+
+.tabWrapper input {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 13px;
+  outline: none;
+  width: 110px;
+}
+
+.contextMenu {
+  position: fixed;
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  padding: 6px;
+  z-index: 9999;
+}
+
+.contextMenu button {
+  background: transparent;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  border-radius: 6px;
+}
+
+.contextMenu button:hover {
+  background: #f5f5f5;
+}
+
+.contextMenu {
+  position: fixed;
+  z-index: 9999;
+}
+
+/* =========================
+   WORKSPACE WRAPPER
+   (레이아웃을 담당하는 핵심)
+========================= */
+.workspaceBarWrapper {
+  height: 6px;              /* 평소엔 거의 안 보이는 히트존 */
+  overflow: hidden;
+  transition: height 0.25s ease;
+  position: relative;
+}
+
+/* hover 시 공간 생성 (아래 UI 밀림) */
+.workspaceBarWrapper:hover {
+  height: 48px;             /* 탭 바 실제 높이 */
+}
+
+/* =========================
+   WORKSPACE BAR
+   (내용 레이아웃)
+========================= */
+.workspaceBar {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* =========================
+   TAB STYLE
+========================= */
+.tabWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.workspaceBar button {
+  border: none;
+  background: transparent;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.workspaceBar button.activeTab {
+  font-weight: bold;
+}
+
+/* =========================
+   ADD TAB
+========================= */
+.addTab {
+  margin-left: 6px;
+}
+
+.workspaceBarWrapper {
+  height: 6px;
+  overflow: hidden;
+  transition: height 0.25s ease;
+  position: relative;
+}
+
+/* hover로 열림 (자동 모드) */
+.workspaceBarWrapper:not(.pinned):hover {
+  height: 48px;
+}
+
+/* pin 고정 모드 */
+.workspaceBarWrapper.pinned {
+  height: 48px;
+}
+
+.workspaceBar {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* pin 버튼 */
+.pinToggle {
+  position: absolute;
+  right: 8px;
+  top: 4px;
+
+  font-size: 12px;
+  padding: 3px 8px;
+
+  border: none;
+  border-radius: 6px;
+  
+
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* =========================
+   WRAPPER (핵심 구조)
+========================= */
+.workspaceBarWrapper {
+  height: 6px;               /* hover 감지용 히트존 */
+  overflow: hidden;
+  transition: height 0.25s ease;
+  position: relative;
+}
+
+/* =========================
+   자동 모드 (hover 시 열림)
+========================= */
+.workspaceBarWrapper:not(.pinned):hover {
+  height: 48px;
+}
+
+/* =========================
+   고정 모드 (항상 열림)
+========================= */
+.workspaceBarWrapper.pinned {
+  height: 48px;
+}
+
+/* =========================
+   실제 탭 바
+========================= */
+.workspaceBar {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* =========================
+   PIN BUTTON
+========================= */
+.pinToggle {
+  position: absolute;
+  right: 8px;
+  top: 4px;
+
+  font-size: 12px;
+  padding: 3px 8px;
+
+  border: none;
+  border-radius: 6px;
+  
+  cursor: pointer;
+  z-index: 10;
+}
+
+.pinToggle {
+  position: absolute;
+  right: 8px;
+  top: 4px;
+
+  font-size: 12px;
+  padding: 3px 8px;
+
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  outline: none;
+
+  cursor: pointer;
+  z-index: 10;
+}
